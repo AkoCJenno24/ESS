@@ -1,5 +1,5 @@
 import Layout from "./components/Dashboard/layout"
-import Dashboard from "./components/Dashboard/Dashboard"
+import Dashboard from "./components/Dashboard/dashboard"
 
 function App() {
   return (
