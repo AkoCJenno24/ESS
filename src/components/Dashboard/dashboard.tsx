@@ -1,4 +1,6 @@
 import { Button } from "../ui/button"
+import { ModeToggle } from "../theme/mode-toggle"
+
 
 
 const Dashboard = () => {
@@ -8,6 +10,7 @@ const Dashboard = () => {
         Hello world!
       </h1>
       <Button variant="destructive">Click me</Button>
+      <ModeToggle />
     </div>
   )
 }
