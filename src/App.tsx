@@ -1,12 +1,12 @@
+import Layout from "./components/Dashboard/layout"
+import Dashboard from "./components/Dashboard/Dashboard"
+
 function App() {
   return (
-    <>
-     
-      <h1 className="text-3xl font-bold underline text-orange-500">
-        Hello world!
-      </h1>
-    </>
-  );
+    <Layout>
+      <Dashboard />
+    </Layout>
+  )
 }
 
-export default App;
+export default App
