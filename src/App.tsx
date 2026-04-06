@@ -1,14 +1,15 @@
-import Layout from "./components/dashboard/layout"
-import Dashboard from "./components/dashboard/dashboard"
-import { ThemeProvider } from "@/components/theme/theme-provider"
+import Layout from "./layout/dashboard-layout"
+import Dashboard from "./pages/dashboard"
+
+
 
 function App() {
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+    
     <Layout>
-      <Dashboard />
+        <Dashboard />
     </Layout>
-    </ThemeProvider>
+    
   )
 }
 
