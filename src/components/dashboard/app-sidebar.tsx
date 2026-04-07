@@ -9,20 +9,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-<<<<<<< HEAD
-} from "@/components/ui/sidebar"
-import { 
-  User, Calendar, FileText, CreditCard, 
-  Users, HelpCircle, LogOut, Settings 
-} from "lucide-react"
-
-export function AppSidebar() {
-  return (
-    <Sidebar collapsible="icon">
-      {/* 1. Header: Company Logo/Name */}
-      <SidebarHeader className="p-4 font-bold text-xl">
-        ESS Portal
-=======
 } from "@/components/ui/sidebar";
 
 import {
@@ -71,7 +57,6 @@ export function AppSidebar() {
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
->>>>>>> 4a8a594 (updated file directory)
       </SidebarHeader>
 
       <SidebarContent>
@@ -80,17 +65,6 @@ export function AppSidebar() {
           <SidebarGroupLabel>Personal</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-<<<<<<< HEAD
-              <SidebarMenuItem>
-                <SidebarMenuButton tooltip="My Profile"><User /> Profile</SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton tooltip="Leave & Attendance"><Calendar /> Leave & Attendance</SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton tooltip="Pay & Benefits"><CreditCard /> Payroll</SidebarMenuButton>
-              </SidebarMenuItem>
-=======
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
@@ -101,7 +75,6 @@ export function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
->>>>>>> 4a8a594 (updated file directory)
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -112,12 +85,6 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-<<<<<<< HEAD
-                <SidebarMenuButton><Users /> Directory</SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton><FileText /> Documents & Policies</SidebarMenuButton>
-=======
                 <SidebarMenuButton>
                   <Users /> Directory
                 </SidebarMenuButton>
@@ -126,7 +93,6 @@ export function AppSidebar() {
                 <SidebarMenuButton>
                   <FileText /> Documents & Policies
                 </SidebarMenuButton>
->>>>>>> 4a8a594 (updated file directory)
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
@@ -137,12 +103,6 @@ export function AppSidebar() {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-<<<<<<< HEAD
-            <SidebarMenuButton><Settings /> Settings</SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton className="text-destructive"><LogOut /> Logout</SidebarMenuButton>
-=======
             <SidebarMenuButton>
               <Settings /> Settings
             </SidebarMenuButton>
@@ -151,14 +111,9 @@ export function AppSidebar() {
             <SidebarMenuButton className="text-destructive">
               <LogOut /> Logout
             </SidebarMenuButton>
->>>>>>> 4a8a594 (updated file directory)
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>
     </Sidebar>
-<<<<<<< HEAD
-  )
-=======
   );
->>>>>>> 4a8a594 (updated file directory)
 }
