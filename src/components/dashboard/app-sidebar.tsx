@@ -9,8 +9,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
-
+} from "@/components/ui/sidebar"
 import {
   User,
   Calendar,
@@ -20,26 +19,31 @@ import {
   LogOut,
   Settings,
   Terminal,
-} from "lucide-react";
+  Home,
+  ClipboardList,
+  CalendarCheck2,
+  LifeBuoy,
+} from "lucide-react"
+import { NavLink } from "react-router-dom"
+import { appPaths, type AppRouteKey } from "@/routes"
+
+type SidebarItem = {
+  title: string
+  icon: React.ComponentType<{ className?: string }>
+  routeKey: AppRouteKey
+}
 
 export function AppSidebar() {
-  const items = [
-    {
-      title: "Profile",
-      icon: User,
-      url: "#",
-    },
-    {
-      title: "Leave & Attendance",
-      icon: Calendar,
-      url: "#",
-    },
-    {
-      title: "Payroll",
-      icon: CreditCard,
-      url: "#",
-    },
-  ];
+  const items: SidebarItem[] = [
+    { title: "Dashboard", icon: Home, routeKey: "dashboard" },
+    { title: "Profile", icon: User, routeKey: "profile" },
+    { title: "Leave & Attendance", icon: Calendar, routeKey: "leave" },
+    { title: "Payroll", icon: CreditCard, routeKey: "payroll" },
+    { title: "My Requests", icon: ClipboardList, routeKey: "myRequests" },
+    { title: "Attendance Details", icon: CalendarCheck2, routeKey: "attendance" },
+    { title: "Documents", icon: FileText, routeKey: "documents" },
+    { title: "Helpdesk", icon: LifeBuoy, routeKey: "helpdesk" }
+  ]
 
   return (
     <Sidebar collapsible="icon">
@@ -47,20 +51,18 @@ export function AppSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <a href="#">
+              <NavLink to={appPaths.dashboard}>
                 <Terminal />
-
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">ESS Portal</span>
                 </div>
-              </a>
+              </NavLink>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
 
       <SidebarContent>
-        {/* 2. Personal Group: Everyday tasks */}
         <SidebarGroup>
           <SidebarGroupLabel>Personal</SidebarGroupLabel>
           <SidebarGroupContent>
@@ -68,10 +70,15 @@ export function AppSidebar() {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                    <NavLink
+                      to={appPaths[item.routeKey]}
+                      className={({ isActive }) =>
+                        isActive ? "font-semibold text-foreground" : "text-muted-foreground"
+                      }
+                    >
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -79,7 +86,6 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
 
-        {/* 3. Company Group: Resources & People */}
         <SidebarGroup>
           <SidebarGroupLabel>Organization</SidebarGroupLabel>
           <SidebarGroupContent>
@@ -99,7 +105,6 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      {/* 4. Footer: Settings & User Profile Toggle */}
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -115,5 +120,5 @@ export function AppSidebar() {
         </SidebarMenu>
       </SidebarFooter>
     </Sidebar>
-  );
+  )
 }

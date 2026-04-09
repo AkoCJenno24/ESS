@@ -1,16 +1,10 @@
-import Layout from "./layout/dashboard-layout"
-import Dashboard from "./pages/dashboard"
-
-
+import { useRoutes } from "react-router-dom"
+import Layout from "@/layout/dashboard-layout"
+import { appRoutes } from "@/routes"
 
 function App() {
-  return (
-    
-    <Layout>
-        <Dashboard />
-    </Layout>
-    
-  )
+  const routedContent = useRoutes(appRoutes)
+  return <Layout>{routedContent}</Layout>
 }
 
 export default App
