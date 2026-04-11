@@ -9,6 +9,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar"
 import {
   User,
@@ -18,7 +19,6 @@ import {
   Users,
   LogOut,
   Settings,
-  Terminal,
   Home,
   ClipboardList,
   CalendarCheck2,
@@ -26,6 +26,8 @@ import {
 } from "lucide-react"
 import { NavLink } from "react-router-dom"
 import { appPaths, type AppRouteKey } from "@/routes"
+import { NexoLogo } from "@/components/dashboard/logo"
+
 
 type SidebarItem = {
   title: string
@@ -34,10 +36,12 @@ type SidebarItem = {
 }
 
 export function AppSidebar() {
+  const { isMobile, setOpen } = useSidebar()
+
   const items: SidebarItem[] = [
     { title: "Dashboard", icon: Home, routeKey: "dashboard" },
     { title: "Profile", icon: User, routeKey: "profile" },
-    { title: "Leave & Attendance", icon: Calendar, routeKey: "leave" },
+    { title: "Leave", icon: Calendar, routeKey: "leave" },
     { title: "Payroll", icon: CreditCard, routeKey: "payroll" },
     { title: "My Requests", icon: ClipboardList, routeKey: "myRequests" },
     { title: "Attendance Details", icon: CalendarCheck2, routeKey: "attendance" },
@@ -46,18 +50,24 @@ export function AppSidebar() {
   ]
 
   return (
-    <Sidebar collapsible="icon">
+    <Sidebar
+      collapsible="icon"
+      onMouseEnter={() => {
+        if (!isMobile) setOpen(true)
+      }}
+      onMouseLeave={() => {
+        if (!isMobile) setOpen(false)
+      }}
+    >
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild>
-              <NavLink to={appPaths.dashboard}>
-                <Terminal />
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">ESS Portal</span>
-                </div>
-              </NavLink>
-            </SidebarMenuButton>
+          <SidebarMenuButton asChild>
+  <NavLink to={appPaths.dashboard} className="flex items-center gap-2">
+    <NexoLogo className="h-6 w-6 stroke-[1.5]" /> {/* Styled like Lucide icons */}
+    <span className="font-semibold text-lg tracking-tight">Nexo</span>
+  </NavLink>
+</SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>

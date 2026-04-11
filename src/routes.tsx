@@ -10,7 +10,7 @@ import AttendancePage from "./pages/attendance"
 import DocumentsPage from "./pages/documents"
 import HelpdeskPage from "./pages/helpdesk"
 
-export type AppRouteKey = "dashboard" | "profile" | "leave" | "payroll" | "myRequests" | "myRequests" | "attendance" | "documents" | "helpdesk"
+export type AppRouteKey = "dashboard" | "profile" | "leave" | "payroll" | "myRequests" | "attendance" | "documents" | "helpdesk"
 
 export const appPaths: Record<AppRouteKey, string> = {
   dashboard: "/dashboard",

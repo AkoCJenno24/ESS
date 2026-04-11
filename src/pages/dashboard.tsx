@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import {
   Card,
   CardContent,
@@ -18,6 +17,11 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { CalendarDays, Clock3, FileText, Wallet } from "lucide-react"
+import {
+  useAttendanceClock,
+  formatDuration,
+  formatTime,
+} from "@/hooks/use-attendance-clock"
 
 const upcomingLeaves = [
   { type: "Casual Leave", from: "2026-04-15", to: "2026-04-16", status: "Approved" },
@@ -25,17 +29,69 @@ const upcomingLeaves = [
 ]
 
 export default function Dashboard() {
+  const { attendance, totalWorkedMs, clockIn, clockOut } = useAttendanceClock()
+
   return (
     <div className="space-y-6">
-      <section className="flex flex-col justify-between gap-4 rounded-xl border p-4 md:flex-row md:items-center">
-        <div>
-          <h2 className="text-2xl font-semibold">Welcome back, Jenno</h2>
-          <p className="text-muted-foreground">Here is your employee overview for this week.</p>
-        </div>
-        <div className="flex w-full gap-2 md:w-auto">
-          <Input placeholder="Search requests..." className="md:w-64" />
-          <Button>New Request</Button>
-        </div>
+      <section className="grid gap-4 lg:grid-cols-12">
+        <section className="rounded-xl border p-6 lg:col-span-8">
+          <div className="space-y-2">
+            <h2 className="text-2xl font-semibold">Welcome back, Jenno</h2>
+            <p className="text-muted-foreground">
+              Here is your employee overview for this week. Keep track of attendance, leave
+              balance, and payroll updates from one place.
+            </p>
+          </div>
+
+          <div className="mt-6 grid gap-3 sm:grid-cols-3">
+            <div className="rounded-lg bg-muted/40 p-3">
+              <p className="text-xs text-muted-foreground">Today</p>
+              <p className="text-sm font-medium">Friday, Apr 10</p>
+            </div>
+            <div className="rounded-lg bg-muted/40 p-3">
+              <p className="text-xs text-muted-foreground">This Week</p>
+              <p className="text-sm font-medium">2 pending requests</p>
+            </div>
+            <div className="rounded-lg bg-muted/40 p-3">
+              <p className="text-xs text-muted-foreground">Reminder</p>
+              <p className="text-sm font-medium">Submit timesheet by 6:00 PM</p>
+            </div>
+          </div>
+        </section>
+
+        <Card className="lg:col-span-4">
+          <CardHeader>
+            <CardTitle>Today Attendance</CardTitle>
+            <CardDescription>Clock in/out and track today&apos;s work duration</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex flex-wrap items-center gap-2">
+              <Badge variant={attendance.isClockedIn ? "default" : "secondary"}>
+                {attendance.isClockedIn ? "Clocked In" : "Clocked Out"}
+              </Badge>
+              <span className="text-sm text-muted-foreground">
+                In: {formatTime(attendance.clockedInAt)}
+              </span>
+              <span className="text-sm text-muted-foreground">
+                Out: {formatTime(attendance.clockedOutAt)}
+              </span>
+            </div>
+
+            <div>
+              <p className="text-sm text-muted-foreground">Total worked today</p>
+              <p className="text-xl font-semibold">{formatDuration(totalWorkedMs)}</p>
+            </div>
+
+            <div className="flex gap-2">
+              <Button onClick={clockIn} disabled={attendance.isClockedIn}>
+                Clock In
+              </Button>
+              <Button onClick={clockOut} disabled={!attendance.isClockedIn}>
+                Clock Out
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       </section>
 
       <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
